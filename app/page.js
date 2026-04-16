@@ -146,37 +146,95 @@ Build a comprehensive ROI analysis:
 Format with clear numbers, tables where appropriate. Show your math.`,
   },
   {
-    id: "discovery",
+    id: "deal-analysis",
     num: "05",
-    name: "Discovery Question Generator",
-    short: "Discovery Qs",
-    desc: "Tailored technical and business discovery questions based on prospect context — built to surface real pain and qualify deal velocity.",
+    name: "Deal Analysis (MEDDPIC)",
+    short: "Deal Analysis",
+    desc: "Scientific deal qualification using the MEDDPIC framework — scores where you stand, surfaces gaps in your deal, and tells you exactly what to do next to improve win probability.",
     icon: "◇",
     fields: [
-      { key: "company", label: "Prospect Company", placeholder: "e.g. Bland AI, UnitedHealth Group" },
-      { key: "role", label: "Who You're Meeting", placeholder: "e.g. CTO, VP Product, Director of Contact Center Ops" },
-      { key: "stage", label: "Deal Stage", placeholder: "e.g. First meeting, Technical eval, POC scoping" },
+      { key: "account", label: "Account Name", placeholder: "e.g. Decagon, Five9, Kaiser Permanente" },
+      { key: "prospect", label: "Prospect Name & Title (optional)", placeholder: "e.g. Sarah Chen, VP of Engineering" },
+      { key: "context", label: "Deal Context (what you know so far)", placeholder: "e.g. Had intro call, they're using Whisper, evaluating for voice agent platform, ~2M minutes/month, no budget confirmed yet" },
     ],
-    buildPrompt: (f) => `You are a senior enterprise AE at Deepgram preparing for a ${f.stage || "first meeting"} with ${f.role || "a technical buyer"} at ${f.company || "a prospect company"}.
+    buildPrompt: (f) => `You are an elite deal strategist and MEDDPIC coach at Deepgram. You have deep knowledge of Deepgram's full product suite, competitive positioning, and sales motion.
 
-Deepgram sells voice AI infrastructure: STT (Nova), TTS, Voice Agent API (Flux), Audio Intelligence, self-hosted options. Key differentiators: latency, cost, self-hosted, custom models, unified API.
+**DEEPGRAM PRODUCT KNOWLEDGE:**
+- Speech-to-Text (Nova models): Real-time and batch, sub-300ms latency, $0.0043/min, 30+ languages, custom model training
+- Text-to-Speech: Natural-sounding voices, low-latency streaming, $0.015/1K chars
+- Voice Agent API (Flux): Unified API combining STT + TTS + LLM orchestration into a single endpoint — eliminates multi-vendor stitching
+- Audio Intelligence: Summarization, topic detection, sentiment analysis, intent recognition
+- Self-hosted deployment: On-prem/VPC for HIPAA, SOC2, FedRAMP compliance requirements
+- Custom model training: Domain-specific vocabulary and acoustic models for enterprise accuracy
 
-Generate a discovery question framework:
+**DEEPGRAM CUSTOMERS & PROOF POINTS:**
+- Twilio (voice infrastructure partner), Sierra (Bret Taylor's AI agent platform), Decagon (AI customer support agents), Cloudflare, IBM, Cresta, Vapi, Daily, Kore.ai, Cognigy, NICE
+- 200K+ developers on platform
+- Lowest cost per minute in the market at scale
+- Only major voice AI provider offering true self-hosted deployment
 
-**1. Current State (5 questions)** — Understand their existing voice/audio stack, volume, pain points, vendor relationships
-**2. Technical Requirements (5 questions)** — Latency needs, deployment constraints, compliance, accuracy requirements, language support
-**3. Business Impact (4 questions)** — What's broken today? What's the cost of inaction? Who else cares internally?
-**4. Decision Process (4 questions)** — Timeline, budget, stakeholders, evaluation criteria, competitive eval
-**5. Qualification Signals (3 questions)** — Red flags vs. green flags to listen for
+**DEEPGRAM GTM MOTIONS:**
+- PLG/Developer-led: Self-serve sign-up, consumption-based, 14-45 day cycle
+- Partner/OEM: Embedded in CCaaS platforms, 90-180 day cycle
+- Enterprise Direct: Self-hosted, custom models, 120-240 day cycle, $500K+ ACV
 
-For each question:
-- The actual question to ask (conversational, not robotic)
-- **Why you're asking** — what signal you're listening for
-- **If they say X → do Y** — branching logic based on common answers
+**YOUR TASK:**
+Analyze this deal using the MEDDPIC framework and provide a scientific assessment of deal health.
 
-Tailor everything to the specific company and persona. A CTO gets different questions than a VP of CX. A first meeting gets different depth than a POC scoping call.
+**ACCOUNT:** ${f.account || "Unknown"}
+${f.prospect ? `**PROSPECT:** ${f.prospect}` : ""}
+${f.context ? `**DEAL CONTEXT:** ${f.context}` : "**DEAL CONTEXT:** No context provided — assess based on what you know about this company and provide assumptions."}
 
-End with a **Meeting Exit Criteria** — what must be true by the end of this meeting to advance the deal.`,
+**OUTPUT FORMAT:**
+
+## Deal Health Score: X/100
+One-line verdict on deal probability.
+
+## MEDDPIC Analysis
+
+For EACH element, provide:
+- **Score (1-10)** with a colored indicator
+- **What We Know** — facts from the context provided
+- **What We're Missing** — gaps that reduce win probability
+- **Action Required** — specific next step to fill the gap
+
+### M — Metrics
+What quantifiable business outcomes will the prospect achieve? Do we have hard numbers tied to their pain?
+
+### E — Economic Buyer
+Who has the budget and final sign-off authority? Have we identified and accessed this person?
+
+### D — Decision Criteria
+What technical and business criteria will they use to evaluate? Are we shaping these criteria in our favor?
+
+### D — Decision Process
+What is the buying process, timeline, and sequence of steps to close? Do we know every stage and stakeholder?
+
+### P — Paper Process
+What does procurement, legal, and security review look like? What compliance requirements exist (HIPAA, SOC2, FedRAMP)?
+
+### I — Identify Pain
+What is the compelling event or pain driving urgency? Is there a cost of inaction?
+
+### C — Champion
+Who internally is advocating for Deepgram? Do they have influence, access to the EB, and a personal win tied to this deal?
+
+## Gap Analysis
+Rank the top 3 MEDDPIC gaps from most critical to least. For each:
+- Why this gap threatens the deal
+- The specific action, email, or meeting to close it
+- Who on the Deepgram team should be involved (AE, SE, exec sponsor)
+
+## Recommended Next 3 Moves
+Concrete, sequenced actions to advance this deal in the next 7-14 days.
+
+## Risk Flags
+Red flags that could kill this deal, and mitigation strategies.
+
+## Deepgram Products to Lead With
+Based on this account's profile, rank which products to lead with and why.
+
+Be brutally honest. Optimistic deal assessment kills pipelines. Score low where information is missing — "we don't know" is a 2, not a 5.`,
   },
   {
     id: "pitch",
@@ -215,6 +273,149 @@ Build a persona-specific pitch:
 **7. Leave-Behind** — A one-paragraph summary they can forward internally to champion the deal
 
 Style: Confident, insider-level, no jargon soup. This should feel like a conversation, not a pitch deck read-aloud.`,
+  },
+  {
+    id: "impact",
+    num: "07",
+    name: "Impact Statement Generator",
+    short: "Impact Statement",
+    desc: "Generates a polished 4-5 page impact statement — current state analysis, strategic problem, why Deepgram, phased implementation with ROI, and aligned customer stories.",
+    icon: "▣",
+    fields: [
+      { key: "company", label: "Prospect Company", placeholder: "e.g. Allstate, Vapi, UnitedHealth Group" },
+      { key: "industry", label: "Industry / Vertical", placeholder: "e.g. Insurance, Voice AI Platform, Healthcare" },
+      { key: "pain", label: "Primary Pain / Current State", placeholder: "e.g. Using Google STT at $0.024/min, 5M minutes/month, latency issues on live agents, evaluating alternatives" },
+      { key: "contact", label: "Primary Contact & Title (optional)", placeholder: "e.g. James Park, VP of Engineering" },
+    ],
+    buildPrompt: (f) => `You are a senior strategic Account Executive at Deepgram creating a personalized Impact Statement document for ${f.company || "a prospect"}. This is a polished, executive-ready deliverable — not a pitch deck, not an email. It's a 4-5 page leave-behind that makes the business case for Deepgram in the prospect's specific context.
+
+**DEEPGRAM FULL CONTEXT:**
+Products:
+- Speech-to-Text (Nova 3): Real-time ($0.0043/min) and batch ($0.0036/min), sub-300ms latency, 30+ languages, custom model training, speaker diarization, smart formatting
+- Text-to-Speech (Aura): Natural low-latency voices, streaming output, $0.015/1K characters
+- Voice Agent API (Flux): Unified STT + TTS + LLM orchestration — single API replaces multi-vendor stack. Handles end-of-turn detection, interruptions, context management
+- Audio Intelligence: Summarization, topic detection, sentiment analysis, intent recognition, entity detection
+- Self-hosted deployment: On-prem, VPC, air-gapped environments. HIPAA, SOC2 Type II, GDPR, FedRAMP-ready
+- Custom models: Domain-specific vocabulary, acoustic adaptation, enterprise accuracy optimization
+
+Pricing Model:
+- Usage-based, pay-as-you-go
+- Volume discounts at scale (committed use)
+- Self-hosted: Annual license + support
+- No per-seat fees, no platform fees
+
+Key Customers: Twilio, Sierra, Decagon, Cloudflare, IBM, Cresta, Vapi, Daily, Kore.ai, Cognigy, NICE, Granola, Coval
+Developer Community: 200K+ developers
+
+Competitive Advantages:
+- Lowest real-time STT cost in market ($0.0043/min vs Google $0.024/min vs AssemblyAI $0.0065/min)
+- Sub-300ms end-to-end latency (purpose-built, not stitched together)
+- Only major provider with true self-hosted deployment
+- Custom model training for domain-specific accuracy
+- Unified Voice Agent API eliminates multi-vendor complexity
+
+**PROSPECT CONTEXT:**
+- Company: ${f.company || "Target Company"}
+- Industry: ${f.industry || "Technology"}
+- Current State / Pain: ${f.pain || "Evaluating voice AI solutions"}
+${f.contact ? `- Primary Contact: ${f.contact}` : ""}
+
+**DOCUMENT STRUCTURE — Follow this EXACT format:**
+
+# Deepgram + ${f.company || "Company"} | Impact Statement
+
+## Deepgram + ${f.company || "Company"}
+*[One compelling tagline that frames the transformation — e.g., "Turning Voice Infrastructure Into a Competitive Advantage"]*
+
+---
+
+## The Current State
+
+### Where ${f.company || "Company"} Stands Today
+Write 2-3 sentences about their current situation based on the context provided. Then create a metrics table:
+
+| Metric | Current State |
+|--------|--------------|
+| [Relevant volume metric] | [Value] |
+| [Current provider/approach] | [Value] |
+| [Current cost metric] | [Value] |
+| [Current pain metric] | [Value] |
+
+### The Strategic Problem: [Current Approach/Provider]
+Explain WHY their current approach is architecturally limited. Frame this the way a consultant would — not as a sales pitch, but as a structural analysis. Include 3-4 bullet points on specific constraints. Reference their specific technology where possible.
+
+**Business Impact:** One hard-hitting paragraph quantifying the cost of inaction.
+
+---
+
+## Why Deepgram
+
+### Built for [Their Specific Use Case]
+4-5 bullet points on why Deepgram is the right fit, each with a bold label and a one-sentence explanation. Tailor to their industry and use case.
+
+### Expected Impact
+Create a table showing projected improvements:
+
+| Metric | Expected Impact |
+|--------|----------------|
+| [Cost reduction] | [Specific %] |
+| [Latency improvement] | [Specific ms] |
+| [Quality/accuracy gain] | [Specific metric] |
+| [Time-to-value] | [Implementation timeline] |
+
+---
+
+## The Strategic Solution
+
+### Phase 1: Immediate Value (30 Days)
+Describe what gets deployed first. Include a comparison table:
+
+| Metric | Current State | Phase 1 Target |
+|--------|--------------|----------------|
+| [Key metric 1] | [Current] | [Target] |
+| [Key metric 2] | [Current] | [Target] |
+| [Key metric 3] | [Current] | [Target] |
+
+**Phase 1 Economics:** One paragraph showing this is net-positive from Day 1.
+
+### Phase 2: Full Deployment (60-90 Days)
+Describe expanded capabilities, integrations, and advanced features.
+
+**Phase 2 Economics:** One paragraph on expanded ROI.
+
+---
+
+## Success Stories: Proof This Works
+
+### Case Study 1: [Most relevant customer]
+**Company Overview:** [One line — industry, scale, use case]
+
+| Metric | Result |
+|--------|--------|
+| [Key result 1] | [Value] |
+| [Key result 2] | [Value] |
+| [Key result 3] | [Value] |
+
+### Case Study 2: [Second relevant customer]
+Same format.
+
+### Case Study 3: [Third relevant customer]
+Same format.
+
+Choose case studies that mirror the prospect's industry, scale, or use case. Use real Deepgram customers (Twilio, Sierra, Decagon, Cloudflare, IBM, Cresta, Vapi, etc.) and construct plausible results based on Deepgram's known differentiators (cost savings, latency, accuracy). Flag any metrics you're estimating vs. confirmed.
+
+---
+
+*Deepgram Impact Statement | Confidential | April 2026*
+
+**STYLE REQUIREMENTS:**
+- Write like a management consultant, not a salesperson
+- Lead with the prospect's world, not Deepgram's features
+- Every section should feel researched and specific to THIS company
+- Tables should have real numbers — estimate intelligently based on context, flag assumptions
+- The document should be something a champion can forward to their CFO and feel proud of
+- Total length: 4-5 pages equivalent in markdown
+- Professional, confident, zero fluff`,
   },
 ];
 
@@ -431,15 +632,15 @@ function HomePage({ onNavigate }) {
         <div style={{ position: "absolute", right: 0, top: 110 }}><Waveform width={260} height={50} bars={35} /></div>
         <div style={{ fontFamily: T.mono, fontSize: 11, color: T.mute, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 40, display: "flex", gap: 24 }}>
           <span style={{ color: T.accent }}>◆</span><span>GTM COMMAND CENTER</span>
-          <span style={{ color: T.accent }}>◆</span><span>6 AI AGENTS</span>
+          <span style={{ color: T.accent }}>◆</span><span>7 AI AGENTS</span>
           <span style={{ color: T.accent }}>◆</span><span>READY TO DEPLOY</span>
         </div>
         <h1 style={{ fontFamily: T.serif, fontSize: "clamp(48px, 8vw, 108px)", fontWeight: 400, lineHeight: 0.92, letterSpacing: "-0.03em", marginBottom: 28 }}>
           Deepgram<br /><em style={{ fontStyle: "italic", color: T.accent }}>GTM Hub.</em>
         </h1>
-        <p style={{ maxWidth: 600, fontSize: 18, lineHeight: 1.6, color: T.dim, fontWeight: 300, marginBottom: 48 }}>Six AI-powered agents built to accelerate every stage of the Deepgram sales cycle — from account research to competitive positioning to closed-won.</p>
+        <p style={{ maxWidth: 600, fontSize: 18, lineHeight: 1.6, color: T.dim, fontWeight: 300, marginBottom: 48 }}>Seven AI-powered agents built to accelerate every stage of the Deepgram sales cycle — from account research to deal analysis to closed-won.</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0, borderTop: `1px solid ${T.line}`, borderBottom: `1px solid ${T.line}` }}>
-          {[["6", "AI Agents Live"], ["< 30s", "Time to Output"], ["∞", "Sequences Generated"]].map(([num, label], i) => (
+          {[["7", "AI Agents Live"], ["< 30s", "Time to Output"], ["∞", "Sequences Generated"]].map(([num, label], i) => (
             <div key={i} style={{ padding: "24px 20px", borderRight: i < 2 ? `1px solid ${T.line}` : "none" }}>
               <div style={{ fontFamily: T.serif, fontSize: 42, lineHeight: 1, marginBottom: 6 }}>{num}</div>
               <div style={{ fontFamily: T.mono, fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: T.mute }}>{label}</div>

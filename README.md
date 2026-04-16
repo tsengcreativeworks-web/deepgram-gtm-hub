@@ -1,6 +1,6 @@
 # Deepgram GTM Command Center
 
-AI-powered go-to-market hub with 6 agents + strategy playbook, built for Deepgram.
+AI-powered go-to-market hub with 7 agents + strategy playbook, built for Deepgram.
 
 ## Quick Deploy (GitHub → Vercel)
 
@@ -89,7 +89,7 @@ deepgram-gtm-hub/
 └── README.md
 ```
 
-## The 6 Agents
+## The 7 Agents
 
 | # | Agent | What It Does |
 |---|-------|-------------|
@@ -97,8 +97,9 @@ deepgram-gtm-hub/
 | 02 | Account Research Agent | 5-dimension ICP scoring with entry strategy |
 | 03 | Competitive Battle Card | Head-to-head battle cards with trap questions |
 | 04 | ROI Calculator | Cost modeling with 3-year projections |
-| 05 | Discovery Question Generator | Persona-specific discovery Qs with branching logic |
+| 05 | Deal Analysis (MEDDPIC) | Scientific deal qualification — scores gaps, surfaces missing intel, recommends next moves |
 | 06 | Persona Pitch Builder | CTO/VP/CEO-tailored pitch narratives |
+| 07 | Impact Statement Generator | Executive-ready 4-5 page impact statement with current state, ROI, phased implementation, and aligned case studies |
 
 ## Local Development
 
