@@ -693,7 +693,7 @@ function HomePage({ onNavigate }) {
           <span style={{ fontFamily: T.mono, fontSize: 11, color: T.warn, letterSpacing: "0.08em" }}>VERTICAL STRATEGY</span>
         </div>
         <h3 style={{ fontFamily: T.serif, fontSize: 32, fontWeight: 400, lineHeight: 1.1, marginBottom: 12, maxWidth: "70%" }}>Deepgram for Restaurants</h3>
-        <p style={{ fontSize: 15, color: T.dim, marginBottom: 24, maxWidth: "60%" }}>Drive-thru voice AI built on the OfOne acquisition. Three-tier QSR account strategy with $60K/store ROI math, named targets from McDonald's to regional franchisees.</p>
+        <p style={{ fontSize: 15, color: T.dim, marginBottom: 24, maxWidth: "60%" }}>Drive-thru voice AI built on the OfOne acquisition. Four-tier QSR account strategy — from McDonald's to regional franchisees to platform partnerships — with $60K/store ROI math.</p>
         <button onClick={() => onNavigate("restaurants")} style={{ fontFamily: T.mono, fontSize: 12, letterSpacing: "0.02em", padding: "12px 28px", background: "transparent", color: T.warn, border: `1px solid ${T.warn}`, cursor: "pointer", fontWeight: 600, transition: "all 0.2s" }}
           onMouseEnter={(e) => { e.currentTarget.style.background = T.warn; e.currentTarget.style.color = T.bg; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = T.warn; }}>
@@ -965,9 +965,9 @@ function RestaurantsPage() {
         </div>
       </div>
 
-      {/* Three-Tier Account Strategy */}
-      <SectionHeader num="03" title="Three-Tier Account Strategy" subtitle="Mega-chains, mid-size nationals, and franchisee groups." />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, paddingBottom: 80 }}>
+      {/* Four-Tier Account Strategy */}
+      <SectionHeader num="03" title="Four-Tier Account Strategy" subtitle="Direct sales at three levels — plus embedded distribution through platform partnerships." />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, paddingBottom: 24 }}>
         <TierCard
           tier="TIER 01 / MEGA-CHAINS"
           acv="10,000+ LOCATIONS"
@@ -977,7 +977,7 @@ function RestaurantsPage() {
           whyItems={[
             "McDonald's pulled back from IBM AI — actively evaluating alternatives",
             "Wendy's piloting Google voice AI — displacement opportunity on accuracy and cost",
-            "Taco Bell built in-house at 600 locations — partnership or takeover play",
+            "Taco Bell built in-house at 600+ locations — partnership or takeover play",
             "$60K × 10,000 locations = $600M in annual operator value",
           ]}
           personas="CTO, VP Ops"
@@ -1001,6 +1001,8 @@ function RestaurantsPage() {
           cycle="6–12 mo"
           entry="Named reference + fast deploy"
         />
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, paddingBottom: 80 }}>
         <TierCard
           tier="TIER 03 / FRANCHISEES"
           acv="50–500 LOCATIONS"
@@ -1016,6 +1018,22 @@ function RestaurantsPage() {
           personas="Owner/Operator"
           cycle="4–8 weeks"
           entry="Dollar math + 30-day pilot"
+        />
+        <TierCard
+          tier="TIER 04 / PLATFORM PARTNERSHIPS"
+          acv="EMBEDDED DISTRIBUTION"
+          name="POS & Platform Partners"
+          desc="Not direct sales — infrastructure that makes Tiers 1-3 scalable without linear headcount. One partnership unlocks thousands of locations that would take years to reach directly."
+          targets={["Toast (active ✓)", "Square for Restaurants", "Olo (Thoma Bravo)", "HungerRush", "Oracle MICROS", "NCR Voyix", "Paytronix", "Punchh (PAR)"]}
+          whyItems={[
+            "Toast: 134K+ locations today, projected 244K by 2028 — native integration already active",
+            "Square: 3M+ venues globally, self-serve activation = zero sales motion per location",
+            "Olo: 750 brands (Chipotle, Five Guys, Shake Shack) — one integration = warm access to all",
+            "Loyalty platforms (Paytronix, Punchh): co-build voice-to-loyalty closed loop — no one does this today",
+          ]}
+          personas="VP Product, VP Partnerships, CTO"
+          cycle="3–9 mo to signed"
+          entry="Co-build + rev share"
         />
       </div>
 
@@ -1081,7 +1099,7 @@ function RestaurantsPage() {
 
       {/* Entry Playbook */}
       <SectionHeader num="05" title="Entry Playbook by Tier" subtitle="Different buyers, different motions, different timelines." />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0, border: `1px solid ${T.line}`, marginBottom: 80 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, border: `1px solid ${T.line}`, marginBottom: 24 }}>
         {[
           {
             tier: "TIER 01 — MEGA-CHAINS", title: "Benchmark & Prove", color: orange,
@@ -1103,6 +1121,24 @@ function RestaurantsPage() {
               "Target VP Ops or CTO — decision often made at VP level, no board approval needed",
             ]
           },
+        ].map((phase, i) => (
+          <div key={i} style={{ padding: 32, borderRight: i < 1 ? `1px solid ${T.line}` : "none", borderBottom: `1px solid ${T.line}`, background: T.bg2 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+              <div style={{ width: 10, height: 10, borderRadius: "50%", background: orange, boxShadow: `0 0 0 3px rgba(255,122,69,0.15)` }} />
+              <span style={{ fontFamily: T.mono, fontSize: 11, color: T.dim }}>{phase.tier}</span>
+            </div>
+            <div style={{ fontFamily: T.serif, fontSize: 28, lineHeight: 1, marginBottom: 6 }}>{phase.title}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>ENTRY STRATEGY</div>
+            {phase.steps.map((item, j) => (
+              <div key={j} style={{ padding: "10px 0", borderBottom: `1px solid ${T.line}`, fontSize: 13, color: T.dim, lineHeight: 1.5, display: "flex", gap: 10 }}>
+                <span style={{ fontFamily: T.mono, fontSize: 10, color: T.mute, flexShrink: 0, minWidth: 16 }}>{j + 1}</span>{item}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, border: `1px solid ${T.line}`, borderTop: "none", marginBottom: 80 }}>
+        {[
           {
             tier: "TIER 03 — FRANCHISEES", title: "Math & Speed", color: orange,
             steps: [
@@ -1113,8 +1149,18 @@ function RestaurantsPage() {
               "Close in 4-8 weeks — fastest path to case studies and reference logos",
             ]
           },
+          {
+            tier: "TIER 04 — PLATFORMS", title: "Embed & Scale", color: orange,
+            steps: [
+              "Toast (active): Deepen integration — co-build joint voice ordering product, expand from integration to co-sell",
+              "Square: Pitch API integration + self-serve activation model — no sales motion per location needed",
+              "Olo: Propose embedded voice ordering module as upsell to their 750 brands — rev share on usage",
+              "Loyalty platforms: Co-build voice-to-loyalty personalization — new buyer (CMO) alongside CTO",
+              "Oracle/NCR: Pursue certified integration partner status to appear in enterprise RFPs",
+            ]
+          },
         ].map((phase, i) => (
-          <div key={i} style={{ padding: 32, borderRight: i < 2 ? `1px solid ${T.line}` : "none", background: T.bg2 }}>
+          <div key={i} style={{ padding: 32, borderRight: i < 1 ? `1px solid ${T.line}` : "none", background: T.bg2 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
               <div style={{ width: 10, height: 10, borderRadius: "50%", background: orange, boxShadow: `0 0 0 3px rgba(255,122,69,0.15)` }} />
               <span style={{ fontFamily: T.mono, fontSize: 11, color: T.dim }}>{phase.tier}</span>
@@ -1130,8 +1176,69 @@ function RestaurantsPage() {
         ))}
       </div>
 
+      {/* Partnership Models */}
+      <SectionHeader num="06" title="Partnership Structures" subtitle="Three models for Tier 4 — each with different economics and control." />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, paddingBottom: 24 }}>
+        {[
+          {
+            model: "EMBEDDED / REV SHARE",
+            title: "Build In, Scale Out",
+            desc: "Deepgram API built into the partner's product. Partner sells, Deepgram earns per usage. Scale without sales headcount.",
+            fit: "Toast, Square, Olo",
+            economics: "Lower ACV per deal, but 10-100× distribution multiplier. Most scalable model.",
+            icon: "◉",
+          },
+          {
+            model: "CO-SELL / REFERRAL",
+            title: "Partner Surfaces, We Close",
+            desc: "Partner identifies and qualifies the opportunity. Deepgram runs the sales process and closes. Partner earns a referral fee.",
+            fit: "HungerRush, NCR Voyix, Oracle MICROS",
+            economics: "Moderate ACV, maintains deal control. Good for enterprise accounts where partner has relationships we don't.",
+            icon: "◆",
+          },
+          {
+            model: "WHITE-LABEL / OEM",
+            title: "Engine Underneath",
+            desc: "Partner owns the customer relationship and brands the experience. Deepgram runs underneath. Highest ACV, most complex, most defensible.",
+            fit: "Toast (advanced), loyalty platforms (Paytronix, Punchh)",
+            economics: "Highest ACV per partnership, longest to structure. Creates lock-in — switching costs are enormous once embedded.",
+            icon: "◈",
+          },
+        ].map((m, i) => (
+          <div key={i} style={{ background: T.bg2, border: `1px solid ${T.line}`, padding: 28, position: "relative" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <span style={{ fontFamily: T.mono, fontSize: 18, color: orange }}>{m.icon}</span>
+              <span style={{ fontFamily: T.mono, fontSize: 10, color: orange, letterSpacing: "0.05em" }}>{m.model}</span>
+            </div>
+            <h3 style={{ fontFamily: T.serif, fontSize: 24, lineHeight: 1.1, marginBottom: 12, fontWeight: 400 }}>{m.title}</h3>
+            <p style={{ fontSize: 13, color: T.dim, lineHeight: 1.55, marginBottom: 20 }}>{m.desc}</p>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>BEST FIT PARTNERS</div>
+            <p style={{ fontSize: 12, color: T.text, marginBottom: 16, fontFamily: T.mono }}>{m.fit}</p>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>ECONOMICS</div>
+            <p style={{ fontSize: 12, color: T.dim, lineHeight: 1.5 }}>{m.economics}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Spotlight: Voice-to-Loyalty */}
+      <div style={{ padding: 32, background: T.bg2, border: `1px solid ${orange}`, marginBottom: 80, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: 32, top: "50%", transform: "translateY(-50%)", opacity: 0.15 }}>
+          <span style={{ fontFamily: T.serif, fontSize: 120, color: orange }}>→</span>
+        </div>
+        <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, letterSpacing: "0.08em", marginBottom: 12 }}>JOINT PRODUCT OPPORTUNITY</div>
+        <h3 style={{ fontFamily: T.serif, fontSize: 28, fontWeight: 400, lineHeight: 1.1, marginBottom: 12, maxWidth: "70%" }}>Voice-to-Loyalty Closed Loop</h3>
+        <p style={{ fontSize: 15, color: T.dim, lineHeight: 1.6, maxWidth: "70%", marginBottom: 16 }}>
+          Paytronix or Punchh knows who the guest is. Deepgram personalizes the voice interaction in real time based on purchase history. "Welcome back — want your usual large iced coffee with oat milk?" No one does this today. Opens a new buyer — the CMO and loyalty director — alongside the CTO.
+        </p>
+        <div style={{ display: "flex", gap: 8 }}>
+          {["Paytronix", "Punchh (PAR)", "Thanx"].map((c) => (
+            <span key={c} style={{ fontFamily: T.mono, fontSize: 11, padding: "6px 14px", background: orangeDim, border: `1px solid rgba(255,122,69,0.25)`, borderRadius: 100, color: orange }}>{c}</span>
+          ))}
+        </div>
+      </div>
+
       {/* Market Sizing */}
-      <SectionHeader num="06" title="Why Now" subtitle="The QSR labor crisis isn't cyclical — it's structural." />
+      <SectionHeader num="07" title="Why Now" subtitle="The QSR labor crisis isn't cyclical — it's structural." />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 1, background: T.line, border: `1px solid ${T.line}` }}>
         {[
           ["CA Min Wage", "$20/hr", "Fast-food specific minimum wage as of April 2024"],
