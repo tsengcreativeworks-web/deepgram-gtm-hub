@@ -683,6 +683,23 @@ function HomePage({ onNavigate }) {
           VIEW PLAYBOOK →
         </button>
       </div>
+
+      {/* Restaurants Vertical CTA */}
+      <div style={{ marginTop: 24, padding: 48, background: T.bg2, border: `1px solid ${T.line}`, position: "relative", overflow: "hidden" }}
+        onMouseEnter={(e) => e.currentTarget.style.borderColor = T.accentDim}
+        onMouseLeave={(e) => e.currentTarget.style.borderColor = T.line}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+          <span style={{ fontSize: 28 }}>🍔</span>
+          <span style={{ fontFamily: T.mono, fontSize: 11, color: T.warn, letterSpacing: "0.08em" }}>VERTICAL STRATEGY</span>
+        </div>
+        <h3 style={{ fontFamily: T.serif, fontSize: 32, fontWeight: 400, lineHeight: 1.1, marginBottom: 12, maxWidth: "70%" }}>Deepgram for Restaurants</h3>
+        <p style={{ fontSize: 15, color: T.dim, marginBottom: 24, maxWidth: "60%" }}>Drive-thru voice AI built on the OfOne acquisition. Three-tier QSR account strategy with $60K/store ROI math, named targets from McDonald's to regional franchisees.</p>
+        <button onClick={() => onNavigate("restaurants")} style={{ fontFamily: T.mono, fontSize: 12, letterSpacing: "0.02em", padding: "12px 28px", background: "transparent", color: T.warn, border: `1px solid ${T.warn}`, cursor: "pointer", fontWeight: 600, transition: "all 0.2s" }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = T.warn; e.currentTarget.style.color = T.bg; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = T.warn; }}>
+          VIEW STRATEGY →
+        </button>
+      </div>
     </div>
   );
 }
@@ -831,6 +848,312 @@ function PlaybookPage() {
   );
 }
 
+/* ───────── RESTAURANTS PAGE ───────── */
+function RestaurantsPage() {
+  const orange = "#ff7a45";
+  const orangeDim = "rgba(255,122,69,0.12)";
+
+  const TierCard = ({ tier, acv, name, desc, targets, whyItems, personas, cycle, entry, featured }) => (
+    <div style={{
+      background: featured ? `linear-gradient(180deg, ${orangeDim} 0%, ${T.bg2} 100%)` : T.bg2,
+      border: `1px solid ${featured ? orange : T.line}`, padding: 28,
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: 16, marginBottom: 20, borderBottom: `1px solid ${T.line}` }}>
+        <span style={{ fontFamily: T.mono, fontSize: 10, color: orange, letterSpacing: "0.05em" }}>{tier}</span>
+        <span style={{ fontFamily: T.mono, fontSize: 10, color: T.mute }}>{acv}</span>
+      </div>
+      <h3 style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1.1, marginBottom: 10, fontWeight: 400 }}>{name}</h3>
+      <p style={{ fontSize: 13, color: T.dim, marginBottom: 20, lineHeight: 1.5 }}>{desc}</p>
+
+      <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>TARGET ACCOUNTS</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 20 }}>
+        {targets.map((a) => (<span key={a} style={{ fontFamily: T.mono, fontSize: 10, padding: "3px 8px", background: T.bg3, border: `1px solid ${T.line2}`, borderRadius: 100, color: T.text }}>{a}</span>))}
+      </div>
+
+      <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>WHY THIS TIER</div>
+      {whyItems.map((c, j) => (<div key={j} style={{ padding: "6px 0", borderBottom: `1px solid ${T.line}`, fontSize: 12, color: T.dim, display: "flex", gap: 10, lineHeight: 1.5 }}><span style={{ color: orange, flexShrink: 0 }}>→</span><span>{c}</span></div>))}
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, paddingTop: 20, marginTop: 20, borderTop: `1px solid ${T.line}` }}>
+        <div><div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", marginBottom: 4 }}>Personas</div><div style={{ fontFamily: T.mono, fontSize: 11, color: T.text }}>{personas}</div></div>
+        <div><div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", marginBottom: 4 }}>Cycle</div><div style={{ fontFamily: T.mono, fontSize: 11, color: T.text }}>{cycle}</div></div>
+        <div><div style={{ fontFamily: T.mono, fontSize: 9, color: T.mute, textTransform: "uppercase", marginBottom: 4 }}>Entry</div><div style={{ fontFamily: T.mono, fontSize: 11, color: T.text }}>{entry}</div></div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ paddingBottom: 120 }}>
+      {/* Hero */}
+      <div style={{ padding: "80px 0 60px", borderBottom: `1px solid ${T.line}`, position: "relative" }}>
+        <div style={{ position: "absolute", right: 0, top: 90 }}><Waveform width={260} height={50} bars={35} /></div>
+        <div style={{ fontFamily: T.mono, fontSize: 11, color: T.mute, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 32, display: "flex", gap: 24 }}>
+          {["QSR Drive-Thru AI", "OfOne Acquisition (YC W23)", "Vertical Strategy"].map((t, i) => (<span key={i}><span style={{ color: orange }}>◆ </span>{t}</span>))}
+        </div>
+        <h1 style={{ fontFamily: T.serif, fontSize: "clamp(48px, 8vw, 96px)", fontWeight: 400, lineHeight: 0.92, letterSpacing: "-0.03em", marginBottom: 24 }}>
+          Deepgram for<br /><em style={{ fontStyle: "italic", color: orange }}>Restaurants.</em>
+        </h1>
+        <p style={{ maxWidth: 640, fontSize: 18, lineHeight: 1.6, color: T.dim, fontWeight: 300 }}>
+          Voice AI for QSR drive-throughs — built on Deepgram's acquisition of OfOne (YC W23). 95%+ order containment, $60K in labor savings per store annually, and consistent AI upselling across every lane, every shift.
+        </p>
+      </div>
+
+      {/* Key Metrics */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderBottom: `1px solid ${T.line}` }}>
+        {[["$60K", "Labor Savings / Store / Year"], ["95%+", "Order Containment Rate"], ["31+", "Languages Supported"], ["$0", "Sick Days, Turnover, Training"]].map(([n, l], i) => (
+          <div key={i} style={{ padding: "28px 24px", borderRight: i < 3 ? `1px solid ${T.line}` : "none" }}>
+            <div style={{ fontFamily: T.serif, fontSize: 44, lineHeight: 1, marginBottom: 8, color: i === 0 ? orange : T.text }}>{n}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: T.mute }}>{l}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Acquisition Context */}
+      <SectionHeader num="01" title="The OfOne Acquisition" subtitle="From YC W23 to Deepgram's restaurant vertical." />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, paddingBottom: 80 }}>
+        <div>
+          <p style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1.4, marginBottom: 20 }}>
+            Deepgram acquired OfOne — a Y Combinator W23 company that had already deployed voice AI at QSR drive-throughs with <em style={{ color: orange, fontStyle: "italic" }}>95%+ order containment</em>.
+          </p>
+          <p style={{ fontFamily: T.serif, fontSize: 22, lineHeight: 1.45, color: T.dim }}>
+            The thesis: Deepgram's STT/TTS infrastructure + OfOne's domain-specific QSR intelligence = the only end-to-end voice AI stack purpose-built for restaurants. Not a generic agent bolted onto a drive-thru — a system that understands menus, modifiers, combos, and the chaos of a Friday night rush.
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 1, background: T.line, border: `1px solid ${T.line}` }}>
+          {[
+            ["Drive-thru ordering", "Fully automated order-taking with menu understanding, modifier handling, combo logic, and real-time POS integration via Toast"],
+            ["Phone order automation", "Inbound phone orders handled by AI — no hold times, no missed calls, consistent upselling on every interaction"],
+            ["Intelligent upselling", "AI-driven upsell prompts trained on menu data and order patterns — drives AOV increase without adding labor"],
+            ["Operational intelligence", "Sentiment analysis, agent coaching, compliance monitoring, and speed-of-service analytics from every customer interaction"],
+          ].map(([title, desc], i) => (
+            <div key={i} style={{ background: T.bg2, padding: 24 }}>
+              <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, marginBottom: 6 }}>CAPABILITY · 0{i + 1}</div>
+              <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 6, color: T.text }}>{title}</div>
+              <div style={{ fontSize: 13, color: T.dim, lineHeight: 1.5 }}>{desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ROI Model */}
+      <SectionHeader num="02" title="The Math" subtitle="$60K per store is the headline. Here's how it breaks down." />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, paddingBottom: 80 }}>
+        <div style={{ background: T.bg2, border: `1px solid ${T.line}`, padding: 32 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, letterSpacing: "0.08em", marginBottom: 20 }}>ROI PILLAR 01 — LABOR COST SAVINGS</div>
+          <div style={{ fontFamily: T.serif, fontSize: 48, lineHeight: 1, marginBottom: 16 }}>$60K<small style={{ fontSize: 20, color: T.dim }}>/store/yr</small></div>
+          <p style={{ fontSize: 14, color: T.dim, lineHeight: 1.6, marginBottom: 20 }}>Eliminates 1-2 FTE equivalents per location on order-taking. No sick days, no turnover, no training lag. The savings compound — a 500-location chain saves $30M annually.</p>
+          <div style={{ borderTop: `1px solid ${T.line}`, paddingTop: 16 }}>
+            {[["10 locations", "$600K / year"], ["100 locations", "$6M / year"], ["500 locations", "$30M / year"], ["10,000 locations", "$600M / year"]].map(([loc, sav], i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: `1px solid ${T.line}`, fontFamily: T.mono, fontSize: 12 }}>
+                <span style={{ color: T.dim }}>{loc}</span>
+                <span style={{ color: T.text }}>{sav}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div style={{ background: T.bg2, border: `1px solid ${T.line}`, padding: 32, flex: 1 }}>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, letterSpacing: "0.08em", marginBottom: 16 }}>ROI PILLAR 02 — AOV INCREASE</div>
+            <div style={{ fontFamily: T.serif, fontSize: 36, lineHeight: 1, marginBottom: 12 }}>Consistent upsell</div>
+            <p style={{ fontSize: 14, color: T.dim, lineHeight: 1.6 }}>AI upsells on every single order — no variability between shifts, no training decay, no forgotten prompts. Even a $0.50 AOV increase at 500 orders/day = $91K/store/year in incremental revenue.</p>
+          </div>
+          <div style={{ background: T.bg2, border: `1px solid ${T.line}`, padding: 32, flex: 1 }}>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, letterSpacing: "0.08em", marginBottom: 16 }}>ROI PILLAR 03 — OPERATIONAL INTELLIGENCE</div>
+            <div style={{ fontFamily: T.serif, fontSize: 36, lineHeight: 1, marginBottom: 12 }}>Every interaction, analyzed</div>
+            <p style={{ fontSize: 14, color: T.dim, lineHeight: 1.6 }}>Sentiment scoring, compliance monitoring, speed-of-service analytics, and coaching insights from every customer conversation. Data that was previously invisible — now actionable at the store, district, and chain level.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Three-Tier Account Strategy */}
+      <SectionHeader num="03" title="Three-Tier Account Strategy" subtitle="Mega-chains, mid-size nationals, and franchisee groups." />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, paddingBottom: 80 }}>
+        <TierCard
+          tier="TIER 01 / MEGA-CHAINS"
+          acv="10,000+ LOCATIONS"
+          name="National Mega-Chains"
+          desc="Single deal = 5,000-14,000 locations. Even 10% rollout is massive. McDonald's, Wendy's, and Taco Bell are actively evaluating right now."
+          targets={["McDonald's", "Starbucks", "Taco Bell", "KFC", "Wendy's", "Burger King", "Pizza Hut"]}
+          whyItems={[
+            "McDonald's pulled back from IBM AI — actively evaluating alternatives",
+            "Wendy's piloting Google voice AI — displacement opportunity on accuracy and cost",
+            "Taco Bell built in-house at 600 locations — partnership or takeover play",
+            "$60K × 10,000 locations = $600M in annual operator value",
+          ]}
+          personas="CTO, VP Ops"
+          cycle="12–24 mo"
+          entry="Accuracy benchmark + paid pilot"
+          featured={true}
+        />
+        <TierCard
+          tier="TIER 02 / MID-SIZE NATIONAL"
+          acv="500–5,000 LOCATIONS"
+          name="Mid-Size National Chains"
+          desc="Faster cycles, greenfield opportunities. Most have no voice AI or ran limited experiments. High drive-thru dependency (60-80% of volume)."
+          targets={["Krispy Kreme ✓", "Popeyes ✓", "Jack in the Box ✓", "Dutch Bros", "Raising Cane's", "Wingstop", "Shake Shack", "Panera"]}
+          whyItems={[
+            "Three named customers already in portfolio — expand from pilot to chain-wide",
+            "Not locked into large vendor relationships — greenfield market",
+            "Raising Cane's and Dutch Bros are drive-thru only — cleanest possible use case",
+            "Toast integration = no new hardware for many of these brands",
+          ]}
+          personas="CTO, VP Ops, CEO"
+          cycle="6–12 mo"
+          entry="Named reference + fast deploy"
+        />
+        <TierCard
+          tier="TIER 03 / FRANCHISEES"
+          acv="50–500 LOCATIONS"
+          name="Large Franchisee Groups"
+          desc="The fastest-moving segment. No corporate approval cycles. Operators who feel labor cost pressure personally — they make decisions in weeks, not quarters."
+          targets={["Flynn Restaurant Group", "Carrols (1,000+ BK)", "CA franchisees", "NY franchisees", "WA franchisees", "IL franchisees"]}
+          whyItems={[
+            "Flynn Group alone owns 2,400+ locations across 6 brands — one deal, massive rollout",
+            "Franchisees are ignored by voice AI vendors focused on corporate — underserved market",
+            "3-7% net margins mean $60K/store savings is existential, not incremental",
+            "Minimum wage increases in CA ($20/hr), NY, WA make the ROI case undeniable",
+          ]}
+          personas="Owner/Operator"
+          cycle="4–8 weeks"
+          entry="Dollar math + 30-day pilot"
+        />
+      </div>
+
+      {/* Competitive Positioning */}
+      <SectionHeader num="04" title="Competitive Landscape" subtitle="Who else is in QSR drive-thru AI — and where we win." />
+      <div style={{ overflowX: "auto", border: `1px solid ${T.line}`, marginBottom: 36 }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12, minWidth: 700 }}>
+          <thead>
+            <tr>
+              {["Capability", "Deepgram (OfOne)", "Google / Wendy's", "IBM (exited)", "SoundHound", "ConverseNow"].map((h, i) => (
+                <th key={i} style={{
+                  textAlign: "left", padding: "14px 16px", borderBottom: `1px solid ${T.line}`, borderRight: i < 5 ? `1px solid ${T.line}` : "none",
+                  background: i === 1 ? orangeDim : T.bg2,
+                  fontFamily: T.mono, fontSize: 10, color: i === 1 ? orange : T.dim, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 500,
+                }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["Order containment", ["95%+", "w"], ["~85%", ""], ["Failed", "l"], ["~80%", ""], ["~85%", ""]],
+              ["POS integration (Toast)", ["Native", "w"], ["Custom", ""], ["N/A", "l"], ["Limited", ""], ["Yes", ""]],
+              ["Upselling AI", ["Built-in", "w"], ["Limited", ""], ["No", "l"], ["Basic", ""], ["Yes", ""]],
+              ["Multi-language", ["31+", "w"], ["10+", ""], ["Limited", "l"], ["15+", ""], ["Limited", ""]],
+              ["Operational intelligence", ["Full suite", "w"], ["Basic", ""], ["None", "l"], ["Limited", ""], ["Basic", ""]],
+              ["Self-hosted option", ["Yes", "w"], ["GCP only", ""], ["N/A", "l"], ["No", "l"], ["No", "l"]],
+              ["QSR-specific training", ["OfOne heritage", "w"], ["Generic", ""], ["Generic", "l"], ["Some", ""], ["QSR focused", "w"]],
+              ["Enterprise credibility", ["Deepgram brand", "w"], ["Google brand", "w"], ["Exited market", "l"], ["Growing", ""], ["Startup", "l"]],
+            ].map((row, ri) => (
+              <tr key={ri}>
+                {row.map((cell, ci) => {
+                  const [val, badge] = ci === 0 ? [cell, ""] : cell;
+                  const bgColor = ci === 1 ? "rgba(255,122,69,0.04)" : "transparent";
+                  const badgeStyle = badge === "w" ? { background: "rgba(255,122,69,0.15)", color: orange }
+                    : badge === "l" ? { background: "rgba(255,69,69,0.1)", color: T.red }
+                    : null;
+                  return (
+                    <td key={ci} style={{ padding: "12px 16px", borderBottom: `1px solid ${T.line}`, borderRight: ci < 5 ? `1px solid ${T.line}` : "none", background: bgColor, fontWeight: ci === 0 ? 500 : 400, color: ci === 0 ? T.text : T.dim }}>
+                      {badgeStyle ? <span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 3, fontFamily: T.mono, fontSize: 11, fontWeight: 500, ...badgeStyle }}>{val}</span> : val}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, paddingBottom: 80 }}>
+        <div style={{ padding: 24, background: T.bg2, borderLeft: `2px solid ${orange}` }}>
+          <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, marginBottom: 10, letterSpacing: "0.08em" }}>KEY WIN NARRATIVE</div>
+          <p style={{ fontSize: 14, color: T.dim, lineHeight: 1.6 }}>McDonald's walked away from IBM. Wendy's Google pilot hasn't scaled beyond test markets. We have 3 named QSR customers live, 95%+ containment in production, native Toast integration, and Deepgram's enterprise credibility behind us. No one else combines proven QSR domain expertise with enterprise-grade voice infrastructure.</p>
+        </div>
+        <div style={{ padding: 24, background: T.bg2, borderLeft: `2px solid ${T.accent}` }}>
+          <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, marginBottom: 10, letterSpacing: "0.08em" }}>REFERENCE CUSTOMERS</div>
+          <p style={{ fontSize: 14, color: T.dim, lineHeight: 1.6, marginBottom: 16 }}>Three named logos already deployed — the most powerful asset in enterprise QSR sales.</p>
+          <div style={{ display: "flex", gap: 8 }}>
+            {["Krispy Kreme", "Popeyes", "Jack in the Box"].map((c) => (
+              <span key={c} style={{ fontFamily: T.mono, fontSize: 11, padding: "6px 14px", background: "rgba(19,239,147,0.08)", border: `1px solid rgba(19,239,147,0.2)`, borderRadius: 100, color: T.accent }}>{c}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Entry Playbook */}
+      <SectionHeader num="05" title="Entry Playbook by Tier" subtitle="Different buyers, different motions, different timelines." />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0, border: `1px solid ${T.line}`, marginBottom: 80 }}>
+        {[
+          {
+            tier: "TIER 01 — MEGA-CHAINS", title: "Benchmark & Prove", color: orange,
+            steps: [
+              "Lead with accuracy benchmark vs. their current solution (or their failed experiment)",
+              "Offer a paid pilot at 10-20 locations with defined success criteria",
+              "Staff with SE + dedicated CSM from day one",
+              "Build toward corporate approval with a phased rollout proposal",
+              "Target the CTO or VP Technology — not the franchisee",
+            ]
+          },
+          {
+            tier: "TIER 02 — MID-SIZE", title: "Reference & Deploy", color: orange,
+            steps: [
+              "Lead with named customer reference (Krispy Kreme, Popeyes, Jack in the Box)",
+              "Offer fast deployment — Toast integration = no new hardware",
+              "ROI model built with THEIR store-level data (transactions/day, avg order, labor cost)",
+              "Pilot 5-10 stores, expand on containment rate proof",
+              "Target VP Ops or CTO — decision often made at VP level, no board approval needed",
+            ]
+          },
+          {
+            tier: "TIER 03 — FRANCHISEES", title: "Math & Speed", color: orange,
+            steps: [
+              "Lead with dollar savings per location — $60K is the headline",
+              "Reference a similar operator (same brand, same region)",
+              "Offer 30-day pilot at 5 locations with zero-risk exit",
+              "Sell to the owner directly — one person makes the call",
+              "Close in 4-8 weeks — fastest path to case studies and reference logos",
+            ]
+          },
+        ].map((phase, i) => (
+          <div key={i} style={{ padding: 32, borderRight: i < 2 ? `1px solid ${T.line}` : "none", background: T.bg2 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+              <div style={{ width: 10, height: 10, borderRadius: "50%", background: orange, boxShadow: `0 0 0 3px rgba(255,122,69,0.15)` }} />
+              <span style={{ fontFamily: T.mono, fontSize: 11, color: T.dim }}>{phase.tier}</span>
+            </div>
+            <div style={{ fontFamily: T.serif, fontSize: 28, lineHeight: 1, marginBottom: 6 }}>{phase.title}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: orange, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>ENTRY STRATEGY</div>
+            {phase.steps.map((item, j) => (
+              <div key={j} style={{ padding: "10px 0", borderBottom: `1px solid ${T.line}`, fontSize: 13, color: T.dim, lineHeight: 1.5, display: "flex", gap: 10 }}>
+                <span style={{ fontFamily: T.mono, fontSize: 10, color: T.mute, flexShrink: 0, minWidth: 16 }}>{j + 1}</span>{item}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Market Sizing */}
+      <SectionHeader num="06" title="Why Now" subtitle="The QSR labor crisis isn't cyclical — it's structural." />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 1, background: T.line, border: `1px solid ${T.line}` }}>
+        {[
+          ["CA Min Wage", "$20/hr", "Fast-food specific minimum wage as of April 2024"],
+          ["QSR Turnover", "150%+", "Average annual employee turnover in quick-service restaurants"],
+          ["Drive-Thru %", "70%+", "Share of QSR revenue through drive-thru channel"],
+          ["US QSR Locations", "200K+", "Total addressable locations for drive-thru AI"],
+        ].map(([l, v, n], i) => (
+          <div key={i} style={{ background: T.bg2, padding: "28px 24px" }}>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: T.mute, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>{l}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 48, lineHeight: 1, marginBottom: 10, color: i === 0 ? orange : T.text }}>{v}</div>
+            <div style={{ fontSize: 11, color: T.dim, lineHeight: 1.45 }}>{n}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", padding: "64px 0 0", color: T.mute, fontFamily: T.mono, fontSize: 10, letterSpacing: "0.05em" }}>
+        DEEPGRAM FOR RESTAURANTS · VERTICAL GTM STRATEGY · APRIL 2026 · PREPARED BY <span style={{ color: orange }}>RYAN</span>
+      </div>
+    </div>
+  );
+}
+
 /* ───────── NAV STYLES ───────── */
 const navBtn = (active) => ({
   fontFamily: T.mono, fontSize: 11, letterSpacing: "0.02em",
@@ -868,6 +1191,7 @@ export default function Home() {
             <button style={navBtn(page === "home")} onClick={() => navigate("home")}>Hub</button>
             {AGENTS.map((a) => (<button key={a.id} style={navBtn(page === a.id)} onClick={() => navigate(a.id)}>{a.short}</button>))}
             <button style={{ ...navBtn(page === "playbook"), ...(page !== "playbook" ? { borderColor: "rgba(19,239,147,0.15)", color: T.accent } : {}) }} onClick={() => navigate("playbook")}>Playbook</button>
+            <button style={{ ...navBtn(page === "restaurants"), ...(page !== "restaurants" ? { borderColor: "rgba(255,122,69,0.15)", color: "#ff7a45" } : { background: "rgba(255,122,69,0.1)", color: "#ff7a45", borderColor: "rgba(255,122,69,0.2)" }) }} onClick={() => navigate("restaurants")}>Restaurants</button>
           </div>
           <div style={{ fontFamily: T.mono, fontSize: 10, color: T.mute }}>APR 2026</div>
         </div>
@@ -877,6 +1201,7 @@ export default function Home() {
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 40px", position: "relative", zIndex: 2 }}>
         {page === "home" && <HomePage onNavigate={navigate} />}
         {page === "playbook" && <PlaybookPage />}
+        {page === "restaurants" && <RestaurantsPage />}
         {currentAgent && <AgentPage agent={currentAgent} />}
       </div>
     </div>
